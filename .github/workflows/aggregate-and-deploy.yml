@@ -43,18 +43,22 @@ jobs:
           # 保存生成的 market.json 到临时位置
           cp market.json /tmp/market.json
           
+          # 清理工作区，确保没有未跟踪的文件
+          git clean -fd
+          
           # 检查 gh-pages 分支是否存在
           if git ls-remote --heads origin gh-pages | grep -q 'gh-pages'; then
             echo "gh-pages 分支已存在，切换到该分支"
             git fetch origin gh-pages
-            git checkout gh-pages
+            git checkout -f gh-pages
           else
             echo "创建新的 gh-pages 分支"
             git checkout --orphan gh-pages
+            git rm -rf .
           fi
           
           # 清空 gh-pages 分支的所有内容
-          git rm -rf . || true
+          find . -mindepth 1 -not -path "./.git*" -delete
           
           # 将保存的 market.json 复制回来
           cp /tmp/market.json market.json
