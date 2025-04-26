@@ -1,0 +1,60 @@
+name: Aggregate Registry and Deploy to GitHub Pages
+
+on:
+  schedule:
+    # 每30分钟运行一次
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    # 允许手动触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run aggregator script
+        run: node index.js
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Create gh-pages branch if it doesn't exist
+        run: |
+          git fetch
+          if ! git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+            git checkout --orphan gh-pages
+            git rm -rf .
+            echo "# Koishi Registry Aggregator" > README.md
+            git add README.md
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git config --global user.name "github-actions[bot]"
+            git commit -m "Initial gh-pages branch"
+            git push origin gh-pages
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .
+          branch: gh-pages
+          clean: true
+          clean-exclude: |
+            README.md
+          target-folder: .
+          git-config-name: github-actions[bot]
+          git-config-email: github-actions[bot]@users.noreply.github.com
+          commit-message: "Update market.json [skip ci]"
+          single-commit: true
+          # 只部署 market.json 文件
+          single-file: market.json
