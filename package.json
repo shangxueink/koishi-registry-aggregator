@@ -1,0 +1,15 @@
+{
+    "name": "koishi-registry-aggregator",
+    "version": "1.0.0",
+    "description": "聚合多个 Koishi 插件市场镜像源，提供最全的插件列表",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "node-fetch": "^3.3.2"
+    },
+    "type": "module"
+}
