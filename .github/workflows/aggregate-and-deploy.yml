@@ -7,20 +7,16 @@ on:
   workflow_dispatch:
     # 允许手动触发
 
-# 明确设置权限
-permissions:
-  contents: write
-  pages: write
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # 设置权限
+    permissions:
+      contents: write
+    
     steps:
       - name: 检出代码 🛎️
         uses: actions/checkout@v3
-        with:
-          # 确保检出时有足够的权限
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 设置 Node.js 环境
         uses: actions/setup-node@v3
@@ -37,21 +33,37 @@ jobs:
         run: node index.js
         working-directory: .
 
-      - name: 部署到 GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          folder: .
-          branch: gh-pages
-          clean: true
-          clean-exclude: |
-            README.md
-            index.html
-            assets/
-          target-folder: .
-          git-config-name: github-actions[bot]
-          git-config-email: github-actions[bot]@users.noreply.github.com
-          commit-message: "更新 market.json [skip ci]"
-          single-commit: true
-          # 只部署 market.json 文件
-          single-file: market.json
+      - name: 配置 Git
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: 部署到 gh-pages 分支
+        run: |
+          # 保存生成的 market.json 到临时位置
+          cp market.json /tmp/market.json
+          
+          # 检查 gh-pages 分支是否存在
+          if git ls-remote --heads origin gh-pages | grep -q 'gh-pages'; then
+            echo "gh-pages 分支已存在，切换到该分支"
+            git fetch origin gh-pages
+            git checkout gh-pages
+          else
+            echo "创建新的 gh-pages 分支"
+            git checkout --orphan gh-pages
+          fi
+          
+          # 清空 gh-pages 分支的所有内容
+          git rm -rf . || true
+          
+          # 将保存的 market.json 复制回来
+          cp /tmp/market.json market.json
+          
+          # 添加并提交
+          git add market.json
+          
+          # 提交更改
+          git commit -m "更新 market.json [skip ci]" || echo "没有变更需要提交"
+          
+          # 推送到远程
+          git push origin gh-pages
