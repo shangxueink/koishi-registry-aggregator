@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 // 定义要获取的镜像源列表
 const mirrorUrls = [
     'https://registry.koishi.t4wefan.pub/index.json',
-    'https://kp.itzdrli.cc',
+     //    'https://kp.itzdrli.cc',    // 有广告
     'https://koishi-registry.yumetsuki.moe/index.json',
     'https://koishi-registry-cf.yumetsuki.moe/'
 ];
