@@ -1,4 +1,4 @@
-name: 聚合插件市场并部署到 GitHub Pages
+name: aggregate-and-deploy
 
 on:
   schedule:
