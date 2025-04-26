@@ -1,4 +1,4 @@
-name: Aggregate Registry and Deploy to GitHub Pages
+name: 聚合插件市场并部署到 GitHub Pages
 
 on:
   schedule:
@@ -11,39 +11,45 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
+      - name: 检出代码 🛎️
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: 设置 Node.js 环境
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '22'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: 安装 Yarn
+        run: npm install -g yarn
 
-      - name: Run aggregator script
+      - name: 安装依赖
+        run: yarn install
+
+      - name: 运行聚合脚本
         run: node index.js
+        working-directory: .
 
-      - name: Setup Pages
+      - name: 设置 GitHub Pages
         uses: actions/configure-pages@v3
 
-      - name: Create gh-pages branch if it doesn't exist
+      - name: 检查并创建 gh-pages 分支
         run: |
           git fetch
           if ! git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+            echo "创建 gh-pages 分支..."
             git checkout --orphan gh-pages
             git rm -rf .
-            echo "# Koishi Registry Aggregator" > README.md
+            echo "# Koishi 插件市场聚合器" > README.md
             git add README.md
             git config --global user.email "github-actions[bot]@users.noreply.github.com"
             git config --global user.name "github-actions[bot]"
-            git commit -m "Initial gh-pages branch"
+            git commit -m "初始化 gh-pages 分支"
             git push origin gh-pages
+          else
+            echo "gh-pages 分支已存在"
           fi
 
-      - name: Deploy to GitHub Pages
+      - name: 部署到 GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: .
@@ -54,7 +60,7 @@ jobs:
           target-folder: .
           git-config-name: github-actions[bot]
           git-config-email: github-actions[bot]@users.noreply.github.com
-          commit-message: "Update market.json [skip ci]"
+          commit-message: "更新 market.json [skip ci]"
           single-commit: true
           # 只部署 market.json 文件
           single-file: market.json
