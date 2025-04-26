@@ -33,6 +33,11 @@ jobs:
         run: node index.js
         working-directory: .
 
+      - name: 保存生成的文件
+        run: |
+          mkdir -p /tmp/artifacts
+          cp market.json /tmp/artifacts/
+
       - name: 配置 Git
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -40,34 +45,20 @@ jobs:
 
       - name: 部署到 gh-pages 分支
         run: |
-          # 保存生成的 market.json 到临时位置
-          cp market.json /tmp/market.json
+          # 创建全新的 gh-pages 分支
+          git checkout --orphan gh-pages-new
           
-          # 清理工作区，确保没有未跟踪的文件
-          git clean -fd
+          # 删除工作区中的所有文件
+          git rm -rf .
           
-          # 检查 gh-pages 分支是否存在
-          if git ls-remote --heads origin gh-pages | grep -q 'gh-pages'; then
-            echo "gh-pages 分支已存在，切换到该分支"
-            git fetch origin gh-pages
-            git checkout -f gh-pages
-          else
-            echo "创建新的 gh-pages 分支"
-            git checkout --orphan gh-pages
-            git rm -rf .
-          fi
+          # 复制保存的 market.json
+          cp /tmp/artifacts/market.json .
           
-          # 清空 gh-pages 分支的所有内容
-          find . -mindepth 1 -not -path "./.git*" -delete
-          
-          # 将保存的 market.json 复制回来
-          cp /tmp/market.json market.json
-          
-          # 添加并提交
+          # 添加 market.json 到暂存区
           git add market.json
           
           # 提交更改
-          git commit -m "更新 market.json [skip ci]" || echo "没有变更需要提交"
+          git commit -m "更新 market.json [skip ci]"
           
-          # 推送到远程
-          git push origin gh-pages
+          # 强制推送到 gh-pages 分支，完全替换原有内容
+          git push -f origin gh-pages-new:gh-pages
