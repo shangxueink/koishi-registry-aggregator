@@ -3,6 +3,7 @@
 聚合 Koishi 插件市场镜像源数据。定期自动更新。
 
 > 仓库地址： https://github.com/shangxueink/koishi-registry-aggregator
+> 
 > 镜像仓库地址： https://gitee.com/shangxueink/koishi-registry-aggregator
 
 ## 使用方法
