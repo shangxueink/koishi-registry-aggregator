@@ -2,10 +2,11 @@ import fs from 'fs/promises';
 
 // 定义要获取的镜像源列表
 const mirrorUrls = [
+    'https://raw.githubusercontent.com/Hoshino-Yumetsuki/koishi-registry/refs/heads/pages/index.json',
     // 'https://registry.koishi.t4wefan.pub/index.json',
-    //    'https://kp.itzdrli.cc',    // 有广告
-    'https://koishi-registry.yumetsuki.moe/index.json',
-    // 'https://koishi-registry-cf.yumetsuki.moe/'
+    // 'https://kp.itzdrli.cc', 
+    // 'https://koishi-registry.yumetsuki.moe/index.json',
+    // 'https://koishi-registry-cf.yumetsuki.moe/',
 ];
 
 // 检查插件是否应该被隐藏
