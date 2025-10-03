@@ -24,6 +24,8 @@ https://shangxueink.github.io/koishi-registry-aggregator/market.json
 
 本项目通过 GitHub Actions 定时（每分钟）从多个镜像源获取插件数据，进行合并去重处理后，将结果发布到 GitHub Pages，并且同步到Gitee仓库。
 
+> 但现在只同步Q78KG的唔... 
+
 ## 鸣谢
 
 感谢以下项目提供的镜像源支持：
