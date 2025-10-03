@@ -6,9 +6,11 @@
 
 通过以下地址访问：
 
+大陆：
 ```
 https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json
 ```
+全球：
 ```
 https://shangxueink.github.io/koishi-registry-aggregator/market.json
 ```
