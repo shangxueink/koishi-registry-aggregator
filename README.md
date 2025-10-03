@@ -1,12 +1,10 @@
 # koishi-registry-aggregator
 
-旨在聚合多个 Koishi 插件市场镜像源的数据，解决单一镜像源可能存在的不完整问题，为 Koishi 用户提供一个更加全面的插件资源。
-
-通过定期自动更新，确保插件列表的时效性。
+聚合 Koishi 插件市场镜像源数据。定期自动更新。
 
 ## 使用方法
 
-聚合后的插件市场数据可通过以下地址访问：
+通过以下地址访问：
 
 ```
 https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json
@@ -14,11 +12,11 @@ https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.jso
 ```
 https://shangxueink.github.io/koishi-registry-aggregator/market.json
 ```
-您可以在 Koishi 控制台的插件市场设置中添加此地址作为镜像源。
+
 
 ## 工作原理
 
-本项目通过 GitHub Actions 定时（每30分钟）从多个镜像源获取插件数据，进行合并去重处理后，将结果发布到 GitHub Pages。
+本项目通过 GitHub Actions 定时（每10分钟）从多个镜像源获取插件数据，进行合并去重处理后，将结果发布到 GitHub Pages，并且同步到Gitee仓库。
 
 ## 鸣谢
 
