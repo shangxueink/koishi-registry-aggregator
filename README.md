@@ -9,9 +9,11 @@
 聚合后的插件市场数据可通过以下地址访问：
 
 ```
+https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json
+```
+```
 https://shangxueink.github.io/koishi-registry-aggregator/market.json
 ```
-
 您可以在 Koishi 控制台的插件市场设置中添加此地址作为镜像源。
 
 ## 工作原理
