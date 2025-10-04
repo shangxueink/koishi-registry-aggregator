@@ -32,7 +32,7 @@ https://shangxueink.github.io/koishi-registry-aggregator/market.json
 
 - [t4wefan](https://registry.koishi.t4wefan.pub/index.json) - 提供中国大陆地区优化的镜像
 - [itzdrli](https://kp.itzdrli.cc) - 提供全球可访问的镜像
-- [Q78KG](https://koishi-registry.yumetsuki.moe/index.json) - 提供全球可访问的镜像
+- [Q78KG](https://github.com/Hoshino-Yumetsuki/koishi-registry) - 提供全球可访问的镜像
 
 ## 贡献
 
