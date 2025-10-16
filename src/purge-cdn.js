@@ -1,5 +1,5 @@
-// CDN缓存刷新工具
-// 用于在GitHub Actions构建后刷新jsDelivr CDN缓存
+// CDN缓存刷新
+// 用于在GitHub Actions构建时刷新jsDelivr CDN缓存
 
 async function purgeCDNCache() {
     console.log('开始刷新CDN缓存...');
@@ -28,7 +28,7 @@ async function purgeCDNCache() {
                     success: true,
                     message: result.status || '刷新成功'
                 });
-                console.log(`✅ ${url} 刷新成功: `, result);
+                console.log(`✅ ${url} 刷新成功: \n`, result);
             } else {
                 results.push({
                     url: url,
@@ -49,8 +49,6 @@ async function purgeCDNCache() {
         // 添加短暂延迟，避免请求过于频繁
         await new Promise(resolve => setTimeout(resolve, 1000));
     }
-
-    console.log('CDN缓存刷新完成');
 
     // 返回结果统计
     const successful = results.filter(r => r.success).length;
