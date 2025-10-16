@@ -26,9 +26,9 @@ async function purgeCDNCache() {
                 results.push({
                     url: url,
                     success: true,
-                    message: result.message || '刷新成功'
+                    message: result.status || '刷新成功'
                 });
-                console.log(`✅ ${url} 刷新成功: ${result.message}`);
+                console.log(`✅ ${url} 刷新成功: `, result);
             } else {
                 results.push({
                     url: url,
@@ -43,7 +43,7 @@ async function purgeCDNCache() {
                 success: false,
                 message: error.message
             });
-            console.error(`❌ ${url} 刷新出错:`, error.message);
+            console.error(`❌ ${url} 刷新出错:`, error);
         }
 
         // 添加短暂延迟，避免请求过于频繁
