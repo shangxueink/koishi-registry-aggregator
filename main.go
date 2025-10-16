@@ -32,8 +32,8 @@ func main() {
 
 	fmt.Printf("成功获取镜像源: %s, 包含 %d 个插件\n", mirrorURL, len(registryData["objects"].([]interface{})))
 
-	// 更新时间为当前时间
-	registryData["time"] = time.Now().UTC().Format(time.RFC1123)
+	// // 更新时间为当前时间
+	// registryData["time"] = time.Now().UTC().Format(time.RFC1123)
 
 	// 写入文件
 	if err := writeRegistryFile(registryData); err != nil {
