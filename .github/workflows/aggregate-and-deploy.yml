@@ -18,19 +18,13 @@ jobs:
       - name: 检出代码 🛎️
         uses: actions/checkout@v3
 
-      - name: 设置 Node.js 环境
-        uses: actions/setup-node@v3
+      - name: 设置 Go 环境
+        uses: actions/setup-go@v4
         with:
-          node-version: '22'
+          go-version: '1.21'
 
-      - name: 安装 Yarn
-        run: npm install -g yarn
-
-      - name: 安装依赖
-        run: yarn install
-
-      - name: 运行聚合脚本
-        run: node src/index.js
+      - name: 运行同步脚本
+        run: go run main.go
         working-directory: .
 
       - name: 保存生成的文件
