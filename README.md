@@ -10,20 +10,16 @@
 
 ## 📦 使用方法
 
-### 大陆访问
-```
-https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json
-```
+### 访问
 
-### 全球访问（GitHub Pages + jsDelivr CDN）
-```
-https://cdn.jsdelivr.net/gh/shangxueink/koishi-registry-aggregator@gh-pages/market.json
-```
-
-### 原始GitHub Pages
-```
-https://shangxueink.github.io/koishi-registry-aggregator/market.json
-```
+| 镜像源                                                                                                            | 更新及时性            | 访问稳定性 | 推荐场景         |
+| ----------------------------------------------------------------------------------------------------------------- | --------------------- | ---------- | ---------------- |
+| [Gitee 镜像](https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json)                   | ⭐⭐⭐⭐⭐ 实时同步        | ⭐⭐⭐⭐⭐ 极佳 | 国内用户首选     |
+| [JSDMirror CDN](https://cdn.jsdmirror.com/gh/shangxueink/koishi-registry-aggregator@gh-pages/market.json)         | ⭐⭐ 延迟更新（几小时） | ⭐⭐⭐⭐⭐ 极佳 | 国内用户稳定访问 |
+| [jsDelivr CDN](https://cdn.jsdelivr.net/gh/shangxueink/koishi-registry-aggregator@gh-pages/market.json)           | ⭐⭐ 延迟更新（几小时） | ⭐⭐⭐⭐ 良好  | 通用备用方案     |
+| [GitHub Pages](https://shangxueink.github.io/koishi-registry-aggregator/market.json)                              | ⭐⭐⭐⭐⭐ 实时同步        | ⭐⭐⭐ 一般   | 开发测试使用     |
+| [GitHub Raw](https://github.com/shangxueink/koishi-registry-aggregator/raw/refs/heads/gh-pages/market.json)       | ⭐⭐⭐⭐⭐ 实时同步        | ⭐⭐⭐ 一般   | GitHub环境使用   |
+| [GitHub Releases](https://github.com/shangxueink/koishi-registry-aggregator/releases/download/latest/market.json) | ⭐⭐⭐⭐⭐ 实时同步        | ⭐⭐⭐ 一般   | Releases专用     |
 
 ## ⚙️ 工作原理
 
