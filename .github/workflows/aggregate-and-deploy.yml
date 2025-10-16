@@ -91,7 +91,7 @@ jobs:
           echo "plugin_count=$plugin_count" >> $GITHUB_OUTPUT
           
           # 生成 Release body（使用HTML编码换行）
-          release_body="# Koishi 插件市场镜像源%0A%0A自动同步自 Q78KG (Hoshino-Yumetsuki) 镜像源%0A%0A## 更新时间%0A$current_time%0A%0A## 包含插件数量%0A$plugin_count 个插件%0A%0A## 访问方式%0A- **CDN加速**: https://cdn.jsdelivr.net/gh/shangxueink/koishi-registry-aggregator@gh-pages/market.json%0A- **Gitee镜像**: https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json%0A- **GitHub Pages**: https://shangxueink.github.io/koishi-registry-aggregator/market.json"
+          release_body="更新时间$current_time"
           echo "release_body=$release_body" >> $GITHUB_OUTPUT
 
       - name: 创建新 Release
