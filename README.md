@@ -1,13 +1,12 @@
-专注于同步和分发 Q78KG (Hoshino-Yumetsuki) 的 Koishi 插件市场镜像源。
-
-> 仓库地址： https://github.com/shangxueink/koishi-registry-aggregator
-> 
-> 镜像仓库地址： https://gitee.com/shangxueink/koishi-registry-aggregator
 
 
 本项目已从**多镜像源整合**转变为**单一镜像源同步分发**，
 
 专门同步 [Q78KG/Hoshino-Yumetsuki](https://github.com/Hoshino-Yumetsuki/koishi-registry) 的插件市场数据并分发内容。
+
+> 仓库地址： https://github.com/shangxueink/koishi-registry-aggregator
+> 
+> 镜像仓库地址： https://gitee.com/shangxueink/koishi-registry-aggregator
 
 ## 📦 使用方法
 
