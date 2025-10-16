@@ -1,6 +1,8 @@
 import fs from 'fs/promises';
+import purgeCDNCache from './purge-cdn.js';
 
 // 定义要获取的镜像源列表
+// 暂时以 Hoshino-Yumetsuki 镜像源为准
 const mirrorUrls = [
     'https://raw.githubusercontent.com/Hoshino-Yumetsuki/koishi-registry/refs/heads/pages/index.json',
     // 'https://registry.koishi.t4wefan.pub/index.json',
@@ -101,6 +103,12 @@ async function mergeRegistries() {
     try {
         await fs.writeFile('market.json', JSON.stringify(mergedRegistry, null, 2));
         console.log('已成功将整合后的数据写入 market.json 文件');
+
+        // 数据写入成功后，刷新CDN缓存
+        console.log('开始刷新CDN缓存...');
+        await purgeCDNCache();
+        console.log('CDN缓存刷新完成');
+
     } catch (error) {
         console.error('写入文件失败:', error.message);
     }

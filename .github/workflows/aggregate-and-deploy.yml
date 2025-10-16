@@ -30,7 +30,7 @@ jobs:
         run: yarn install
 
       - name: 运行聚合脚本
-        run: node index.js
+        run: node src/index.js
         working-directory: .
 
       - name: 保存生成的文件
