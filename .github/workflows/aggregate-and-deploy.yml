@@ -56,3 +56,50 @@ jobs:
           
           # 强制推送到 gh-pages 分支，完全替换原有内容
           git push -f origin gh-pages-new:gh-pages
+
+      - name: 删除旧 Release
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // 获取所有 releases
+            const releases = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            
+            // 删除所有现有的 releases
+            for (const release of releases.data) {
+              console.log(`正在删除 release: ${release.name} (ID: ${release.id})`);
+              await github.rest.repos.deleteRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                release_id: release.id
+              });
+            }
+            console.log('所有旧 release 已删除');
+
+      - name: 准备 Release 信息
+        id: prepare-release
+        run: |
+          # 获取当前时间
+          current_time=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          echo "current_time=$current_time" >> $GITHUB_OUTPUT
+          
+          # 获取插件数量
+          plugin_count=$(jq '.objects | length' /tmp/artifacts/market.json)
+          echo "plugin_count=$plugin_count" >> $GITHUB_OUTPUT
+          
+          # 生成 Release body（使用HTML编码换行）
+          release_body="# Koishi 插件市场镜像源%0A%0A自动同步自 Q78KG (Hoshino-Yumetsuki) 镜像源%0A%0A## 更新时间%0A$current_time%0A%0A## 包含插件数量%0A$plugin_count 个插件%0A%0A## 访问方式%0A- **CDN加速**: https://cdn.jsdelivr.net/gh/shangxueink/koishi-registry-aggregator@gh-pages/market.json%0A- **Gitee镜像**: https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json%0A- **GitHub Pages**: https://shangxueink.github.io/koishi-registry-aggregator/market.json"
+          echo "release_body=$release_body" >> $GITHUB_OUTPUT
+
+      - name: 创建新 Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "latest"
+          name: "Koishi Registry Sync"
+          body: ${{ steps.prepare-release.outputs.release_body }}
+          files: /tmp/artifacts/market.json
+          prerelease: false
+          draft: false
