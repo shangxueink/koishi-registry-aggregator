@@ -14,7 +14,7 @@
 
 | 镜像源                                                                                                            | 更新及时性            | 访问稳定性 | 推荐场景         |
 | ----------------------------------------------------------------------------------------------------------------- | --------------------- | ---------- | ---------------- |
-| [Gitee 镜像](https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json)                   | ⭐⭐⭐⭐⭐ 实时同步        | ⭐⭐⭐⭐⭐ 极佳 | 国内用户首选     |
+| [Gitee 镜像](https://gitee.com/shangxueink/koishi-registry-aggregator/raw/gh-pages/market.json)                   | ⭐⭐⭐⭐ 延迟同步        | ⭐⭐⭐⭐ 较佳 | 国内用户首选     |
 | [JSDMirror CDN](https://cdn.jsdmirror.com/gh/shangxueink/koishi-registry-aggregator@gh-pages/market.json)         | ⭐⭐ 延迟更新（几小时） | ⭐⭐⭐⭐⭐ 极佳 | 国内用户稳定访问 |
 | [jsDelivr CDN](https://cdn.jsdelivr.net/gh/shangxueink/koishi-registry-aggregator@gh-pages/market.json)           | ⭐⭐ 延迟更新（几小时） | ⭐⭐⭐⭐ 良好  | 通用备用方案     |
 | [GitHub Pages](https://shangxueink.github.io/koishi-registry-aggregator/market.json)                              | ⭐⭐⭐⭐⭐ 实时同步        | ⭐⭐⭐ 一般   | 开发测试使用     |
